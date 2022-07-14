@@ -1,4 +1,4 @@
-import 'package:vanilla_contacts/single_contact.dart';
+import 'package:vanilla_contacts/models/single_contact.dart';
 
 class ContactBook {
   ContactBook._sharedInstance();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vanilla_contacts/models/contact_book.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,9 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepOrange,
       ),
-      home: const HomePage(title: 'Flutter Demo Home Page'),
+      home: const HomePage(title: 'Contact Book'),
     );
   }
 }
@@ -31,13 +32,24 @@ class HomePage extends StatefulWidget {
 class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final ContactBook contactBook = ContactBook();
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Container(
-          child: const Text('Welcome to my home page'),
-        ) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: ListView.builder(
+        itemCount: contactBook.length,
+        itemBuilder: (context, index) {
+          final contact = contactBook.contact(atIndex: index)!;
+          return ListTile(
+            title: Text(contact.name),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }
