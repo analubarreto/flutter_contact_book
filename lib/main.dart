@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vanilla_contacts/models/contact_book.dart';
 import 'package:vanilla_contacts/widgets/new_contact_view.dart';
+import 'package:vanilla_contacts/models/single_contact.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,17 +34,33 @@ class HomePage extends StatefulWidget {
 class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final ContactBook contactBook = ContactBook();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.builder(
-        itemCount: contactBook.length,
-        itemBuilder: (context, index) {
-          final contact = contactBook.contact(atIndex: index)!;
-          return ListTile(
-            title: Text(contact.name),
+      body: ValueListenableBuilder(
+        valueListenable: ContactBook(),
+        builder: (context, value, child) {
+          final contacts = value as List<Contact>;
+          return ListView.builder(
+            itemCount: contacts.length,
+            itemBuilder: (context, index) {
+              final contact = contacts[index];
+              return Dismissible(
+                onDismissed: (_) {
+                  contacts.remove(contact);
+                },
+                key: ValueKey(contact.id),
+                child: Material(
+                  elevation: 2,
+                  child: ListTile(
+                    tileColor: Colors.deepOrangeAccent,
+                    textColor: Colors.white70,
+                    title: Text(contact.name),
+                  ),
+                ),
+              );
+            },
           );
         },
       ),
