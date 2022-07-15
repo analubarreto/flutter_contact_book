@@ -30,22 +30,25 @@ class _NewContactViewState extends State<NewContactView> {
       appBar: AppBar(
         title: const Text('Add a new contact'),
       ),
-      body: Column(
-        children: [
-          TextField(
-            controller: _controller,
-            decoration: const InputDecoration(
-                hintText: 'Enter a new contact name here'),
-          ),
-          TextButton(
-            onPressed: () {
-              final contact = Contact(name: _controller.text);
-              ContactBook().add(contact: contact);
-              Navigator.of(context).pop();
-            },
-            child: const Text('Add content'),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                  hintText: 'Enter a new contact name here'),
+            ),
+            TextButton(
+              onPressed: () {
+                final contact = Contact(name: _controller.text);
+                ContactBook().add(contact: contact);
+                Navigator.of(context).pop();
+              },
+              child: const Text('Add content'),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -48,7 +48,9 @@ class _MyHomePageState extends State<HomePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          await Navigator.of(context).pushNamed('/new-contact');
+        },
         child: const Icon(Icons.add),
       ),
     );
