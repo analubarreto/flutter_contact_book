@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vanilla_contacts/models/contact_book.dart';
+import 'package:vanilla_contacts/models/single_contact.dart';
 
 class NewContactView extends StatefulWidget {
   const NewContactView({Key? key}) : super(key: key);
@@ -34,6 +36,14 @@ class _NewContactViewState extends State<NewContactView> {
             controller: _controller,
             decoration: const InputDecoration(
                 hintText: 'Enter a new contact name here'),
+          ),
+          TextButton(
+            onPressed: () {
+              final contact = Contact(name: _controller.text);
+              ContactBook().add(contact: contact);
+              Navigator.of(context).pop();
+            },
+            child: const Text('Add content'),
           ),
         ],
       ),

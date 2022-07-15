@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vanilla_contacts/models/contact_book.dart';
+import 'package:vanilla_contacts/widgets/new_contact_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-      ),
-      home: const HomePage(title: 'Contact Book'),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.deepOrange,
+        ),
+        home: const HomePage(title: 'Contact Book'),
+        routes: {'/new-contact': (context) => const NewContactView()});
   }
 }
 
